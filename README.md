@@ -55,3 +55,7 @@ alembic revision --autogenerate -m "create users table"
 ## O argumento head indica que queremos aplicar todas as migrações que 
 ## ainda não foram aplicadas:
 alembic upgrade head
+
+## Autenticação e Autorização
+poetry add "python-jose[cryptography]" "passlib[bcrypt]"
+poetry add python-multipart
