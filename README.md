@@ -73,3 +73,10 @@ INFO  [alembic.autogenerate.compare] Detected added table 'todos'
 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
 INFO  [alembic.runtime.migration] Running upgrade 2dd4b740b56c -> ed810ad38404, create todos table
+
+## Criar Dockerfile e cmd para criar a imagem
+docker build -t "fast_zero" .
+
+
+## Rodando uma imagem
+docker run -p 8000:8000 fast_zero:latest
