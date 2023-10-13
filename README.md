@@ -59,3 +59,17 @@ alembic upgrade head
 ## Autenticação e Autorização
 poetry add "python-jose[cryptography]" "passlib[bcrypt]"
 poetry add python-multipart
+
+
+## Criando a mingração da nova tabela
+❯ alembic revision --autogenerate -m "create todos table"
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.autogenerate.compare] Detected added table 'todos'
+  Generating /home/plautz/Proj_2023/fast_zero/migrations/versions/ed810ad38404_create_todos_table.py ...  done
+
+## Aplicar a mingração
+❯ alembic upgrade head
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade 2dd4b740b56c -> ed810ad38404, create todos table
