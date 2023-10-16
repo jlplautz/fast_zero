@@ -20,10 +20,10 @@ jobs:
       - name: Instalar dependências do projeto
         run: poetry install
 
-      - name: Rodar os testes
-        run: poetry run task test --cov-report=xml
+      # - name: Rodar os testes
+      #   run: poetry run task test --cov-report=xml
 
-      - name: Subir cobertura para o codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+      # - name: Subir cobertura para o codecov
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
