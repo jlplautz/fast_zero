@@ -1,4 +1,5 @@
-from tests.conftest import TodoFactory, TodoState
+from fast_zero.models import TodoState
+from tests.factories import TodoFactory
 
 
 def test_create_todo(client, token):
