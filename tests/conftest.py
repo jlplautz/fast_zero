@@ -54,7 +54,7 @@ def user(session):
 @pytest.fixture
 def other_user(session):
     password = 'testtest'
-    user = UserFactory(password=get_password_hash(password))
+    user = UserFactory(id=2, password=get_password_hash(password))
 
     session.add(user)
     session.commit()
@@ -72,5 +72,3 @@ def token(client, user):
         data={'username': user.email, 'password': user.clean_password},
     )
     return response.json()['access_token']
-
-    return user
