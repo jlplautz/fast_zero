@@ -1,5 +1,9 @@
 FROM python:3.11-slim
-ENV POETRY_VIRTUALENVS_CREATE=false
+ENV DATABASE_URL="sqlite:///database.db" \
+    SECRET_KEY="your-secret-key" \
+    ALGORITHM="HS256" \
+    ACCESS_TOKEN_EXPIRE_MINUTES=30 \
+    POETRY_VIRTUALENVS_CREATE=false
 
 RUN pip install poetry
 
