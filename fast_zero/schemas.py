@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, ConfigDict
+from pydantic import BaseModel, ConfigDict, EmailStr
 
 from fast_zero.models import TodoState
 
@@ -14,10 +14,6 @@ class UserPublic(BaseModel):
     username: str
     email: EmailStr
     model_config = ConfigDict(from_attributes=True)
-
-
-class UserDB(UserSchema):
-    id: int
 
 
 class UserList(BaseModel):

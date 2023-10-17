@@ -1,7 +1,6 @@
 from enum import Enum
 
 from sqlalchemy import ForeignKey
-from pydantic import BaseModel, ConfigDict, EmailStr
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -42,17 +41,17 @@ class Todo(Base):
     user: Mapped[User] = relationship(back_populates='todos')
 
 
-class UserPublic(BaseModel):
-    id: int
-    username: str
-    email: EmailStr
-    model_config = ConfigDict(from_attributes=True)
+# class UserPublic(BaseModel):
+#     id: int
+#     username: str
+#     email: EmailStr
+#     model_config = ConfigDict(from_attributes=True)
 
 
-class Token(BaseModel):
-    access_token: str
-    token_type: str
+# class Token(BaseModel):
+#     access_token: str
+#     token_type: str
 
 
-class TokenData(BaseModel):
-    username: str | None = None
+# class TokenData(BaseModel):
+#     username: str | None = None

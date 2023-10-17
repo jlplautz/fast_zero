@@ -4,6 +4,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
+from passlib.exc import UnknownHashError
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -13,8 +14,7 @@ from fast_zero.schemas import TokenData
 from fast_zero.settings import Settings
 
 settings = Settings()
-
-
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 
 
@@ -35,13 +35,13 @@ def get_password_hash(password: str):
 
 
 def verify_password(plain_password: str, hashed_password: str):
-    return pwd_context.verify(plain_password, hashed_password)
+    try:
+        return pwd_context.verify(plain_password, hashed_password)
+    except UnknownHashError:
+        return False
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
-
-
-async def get_current_user(
+def get_current_user(
     session: Session = Depends(get_session),
     token: str = Depends(oauth2_scheme),
 ):
