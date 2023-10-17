@@ -19,11 +19,14 @@ jobs:
 
       - name: Instalar dependências do projeto
         run: poetry install
-
+        
+      - name: Setup .env
+        run: cp .env.example .env
+        
       - name: Rodar os testes
         run: poetry run task test --cov=fast_zero -vv
 
-      # - name: Subir cobertura para o codecov
-      #   uses: codecov/codecov-action@v3
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Subir cobertura para o codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
