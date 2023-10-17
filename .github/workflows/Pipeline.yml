@@ -21,7 +21,7 @@ jobs:
         run: poetry install
         
       - name: Setup .env
-        run: cp .env.example .env
+        run: cp .env .env
         
       - name: Rodar os testes
         run: poetry run task test --cov=fast_zero -vv
