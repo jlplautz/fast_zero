@@ -20,9 +20,6 @@ jobs:
       - name: Instalar dependências do projeto
         run: poetry install
         
-      - name: Setup .env
-        run: cp .env .env
-        
       - name: Rodar os testes
         run: poetry run task test --cov=fast_zero -vv
 
