@@ -1,10 +1,10 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings#, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file='.env', env_file_encoding='utf-8'
-    )
+    # model_config = SettingsConfigDict(
+    #     env_file='.env', env_file_encoding='utf-8'
+    # )
 
     DATABASE_URL: str = 'sqlite:///database.db'
     SECRET_KEY: str = 'your-secret-key'
