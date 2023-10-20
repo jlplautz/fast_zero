@@ -80,3 +80,10 @@ docker build -t "fast_zero" .
 
 ## Rodando uma imagem
 docker run -p 8000:8000 fast_zero:latest
+
+## Deploy into FLY.io
+fly auth login
+fly launch
+fly deploy --local-only
+fly secrets list
+fly ssh console -app jlp-fastzero
