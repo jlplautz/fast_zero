@@ -87,3 +87,72 @@ fly launch
 fly deploy --local-only
 fly secrets list
 fly ssh console -app jlp-fastzero
+
+fly secrets set DATABASE_URL=postgresql://postgres:postgres@localhost:5432/jlpapi-db
+
+fly secrets set DATABASE_URL=postgresql://postgres:EcDwJNzlp8WxHSu@jlpfapi-db.internal:5432
+fly secrets set SECRET_KEY=your-secret-key
+fly secrets set ACCESS_TOKEN_EXPIRE_MINUTES=30
+fly secrets set ALGORITHM=HS256
+
+fly ssh console --app fastzerojp 'poetry run alembic upgrade head'
+
+
+1- fly launch
+
+Postgres cluster jlpfapi-db created
+  Username:    postgres
+  Password:    GtcgUQPlUgO6ZDD
+  Hostname:    jlpfapi-db.internal
+  Flycast:     fdaa:3:6eb5:0:1::a
+  Proxy port:  5432
+  Postgres port:  5433
+  Connection string: postgres://postgres:GtcgUQPlUgO6ZDD@jlpfapi-db.flycast:5432
+
+Save your credentials in a secure place -- you won't be able to see them again!
+
+Connect to postgres
+Any app within the Jorge Luiz Plautz organization can connect to this Postgres using the above connection string
+
+Now that you've set up Postgres, here's what you need to understand: https://fly.io/docs/postgres/getting-started/what-you-should-know/
+Checking for existing attachments
+Registering attachment
+Creating database
+Creating user
+
+
+2- corrigir DATABASE_URL postgres -> postgresql
+
+❯ fly secrets set DATABASE_URL=postgresql://postgres:spPPWyw4gng7VQd@jlpfapi-db.flycast:5432
+Secrets are staged for the first deployment
+
+3- fly deploy
+
+❯ fly status                                                                                
+App
+  Name     = jlpfapi                                        
+  Owner    = personal                                       
+  Hostname = jlpfapi.fly.dev                                
+  Image    = jlpfapi:deployment-01HE8RARCD5J00AGZKNDYVAAJ8  
+  Platform = machines                                       
+
+Machines
+PROCESS ID              VERSION REGION  STATE   ROLE    CHECKS  LAST UPDATED         
+app     4d89116ec65118  1       gig     started                 2023-11-02T19:33:35Z
+app     e784ee9ea253d8  1       gig     started                 2023-11-02T19:33:48Z
+
+
+4-
+❯ fly ssh console --app jlpfapi 'poetry run alembic upgrade head'
+Error: host unavailable at poetry run alembic upgrade head: malformed resolve command
+
+fast_zero on  main [!?] is 📦 v0.1.0 via 🐍 v3.11.0 (fast-zero-py3.11) took 2s 
+❯ fly ssh console --app jlpfapi
+Connecting to fdaa:3:6eb5:a7b:d2:c1f1:dcd3:2... complete
+root@e784ee9ea253d8:/# poetry run alembic upgrade head
+Skipping virtualenv creation, as specified in config file.
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> 2dd4b740b56c, create users table
+INFO  [alembic.runtime.migration] Running upgrade 2dd4b740b56c -> ed810ad38404, create todos table
+INFO  [alembic.runtime.migration] Running upgrade ed810ad38404 -> 11a4085457a1, create users table
