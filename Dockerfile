@@ -1,5 +1,9 @@
 FROM python:3.11-slim
+
 ENV  POETRY_VIRTUALENVS_CREATE=false
+ENV ALGORITHM=HS256
+ENV SECRET_KEY=your-secret-key
+ENV ACCESS_TOKEN_EXPIRE_MINUTES=30
 
 RUN pip install poetry
 
